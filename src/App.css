@@ -1,0 +1,433 @@
+/* ═══════════════════════════════════════════
+   CANECA 3D MOCKUP — CSS
+   ═══════════════════════════════════════════ */
+
+:root {
+  --bg: #0f0f14;
+  --panel: #16161e;
+  --panel-border: #252530;
+  --accent: #6c5ce7;
+  --accent-hover: #7c6ff7;
+  --text: #e8e8ed;
+  --text-muted: #7878a0;
+  --input-bg: #1e1e2a;
+  --input-border: #30304a;
+  --radius: 10px;
+  --success: #00c48c;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Layout ── */
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* ── Sidebar ── */
+
+#sidebar {
+  width: 320px;
+  min-width: 320px;
+  background: var(--panel);
+  border-right: 1px solid var(--panel-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+#sidebar::-webkit-scrollbar { width: 5px; }
+#sidebar::-webkit-scrollbar-track { background: transparent; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--panel-border); border-radius: 3px; }
+
+.sidebar-header {
+  padding: 20px 20px 14px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.sidebar-header h1 {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon { font-size: 22px; }
+
+.sidebar-header p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ── Sections ── */
+
+.sidebar-section {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* ── Upload ── */
+
+#upload-zone {
+  border: 2px dashed var(--input-border);
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-muted);
+}
+
+#upload-zone:hover, #upload-zone.dragover {
+  border-color: var(--accent);
+  background: rgba(108, 92, 231, 0.06);
+}
+
+#upload-zone svg {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+.upload-label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.upload-sub {
+  font-size: 11px;
+  opacity: 0.5;
+  margin-top: 4px;
+}
+
+#upload-preview {
+  position: relative;
+}
+
+#upload-preview img {
+  width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #111;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0,0,0,0.7);
+  border: none;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.remove-btn:hover { background: rgba(220,50,50,0.8); }
+
+/* ── Controls ── */
+
+.control-block { margin-bottom: 14px; }
+.control-block:last-child { margin-bottom: 0; }
+
+.control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.control-label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ── Color Picker ── */
+
+.color-pick-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 2px solid var(--input-border);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.15s;
+}
+
+.color-swatch:hover { border-color: var(--accent); }
+
+.color-swatch input[type="color"] {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+}
+
+.color-hex {
+  font-size: 12px;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  color: var(--text-muted);
+  min-width: 60px;
+}
+
+/* ── Presets ── */
+
+.color-presets {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.preset-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.preset-dot:hover { transform: scale(1.2); }
+.preset-dot.active { border-color: var(--accent); }
+
+/* ── BG Grid ── */
+
+.bg-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.bg-swatch {
+  aspect-ratio: 1;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.bg-swatch:hover { transform: scale(1.1); }
+.bg-swatch.active { border-color: var(--accent); }
+
+/* ── Toggle ── */
+
+.toggle {
+  width: 40px;
+  height: 22px;
+  background: var(--input-bg);
+  border-radius: 11px;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid var(--input-border);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.toggle.active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.toggle-thumb {
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s;
+}
+
+.toggle.active .toggle-thumb { transform: translateX(18px); }
+
+/* ── Range ── */
+
+.range-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.range-wrap input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 4px;
+  background: var(--input-bg);
+  border-radius: 2px;
+  outline: none;
+}
+
+.range-wrap input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.range-wrap input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.range-value {
+  font-size: 12px;
+  font-family: 'SF Mono', 'Consolas', monospace;
+  color: var(--text-muted);
+  min-width: 40px;
+  text-align: right;
+}
+
+/* ── Select ── */
+
+.res-select {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text);
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.res-select:focus { outline: 1px solid var(--accent); }
+
+/* ── Button ── */
+
+.btn {
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-export {
+  background: var(--success);
+  color: #fff;
+}
+
+.btn-export:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.btn-export:active { transform: translateY(0); }
+
+/* ── Viewport ── */
+
+.viewport {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.mug-canvas-wrap {
+  width: 100%;
+  height: 100%;
+}
+
+.viewport-hint {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.4;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.viewport-hint kbd {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-family: inherit;
+}
+
+/* ── Export Flash ── */
+
+.export-flash {
+  position: fixed;
+  top: 50%;
+  left: calc(320px + 50%);
+  transform: translate(-50%, -50%) scale(0.9);
+  background: var(--panel);
+  border: 1px solid var(--success);
+  border-radius: 12px;
+  padding: 20px 28px;
+  text-align: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.export-flash.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.flash-icon { font-size: 28px; margin-bottom: 6px; }
+.flash-msg { font-size: 14px; font-weight: 500; }
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+  .app-layout { flex-direction: column; }
+  #sidebar { width: 100%; min-width: 100%; max-height: 42vh; }
+  .viewport { min-height: 58vh; }
+}
